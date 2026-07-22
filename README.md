@@ -40,13 +40,73 @@ Working through this issue strengthens my ability to spot logical errors, write 
 
 ### Environment Setup
 
+- Clone the Fork
+    ```
+        https://github.com/krishnasai453/Xplore-workshop.git
+        cd CoC-git-python-workshop
+    ```
+- Creating Solutions Folder
+    krishnasai453_solutions/
+
+- Copied the playground
+    ```
+        SOLUTIONS
+        └── <githubid>_solutions/
+            └── test_playground/
+    ```
+
+- Set Up Virtual Environment
+    ```
+        python3.12 -m venv venv
+        source venv/bin/activate
+    ```
+- Install dependencies:
+    ```
+        pip install -r requirements.txt
+    ≈
+
+### Errors Faced During Environmenr Setup:
+    Faced Following error while installing dependencies
+    ```
+        Building wheel for pygame (pyproject.toml) ... error
+        error: subprocess-exited-with-error
+
+        × Building wheel for pygame (pyproject.toml) did not run successfully.
+        │ exit code: 1
+        ╰─> [14 lines of output]
+            src_c/_sdl2/sdl2.c:1237:10: fatal error: 'SDL.h' file not found
+            1237 | #include "SDL.h"
+                    |          ^~~~~~~
+            1 error generated.
+            Skipping Cython compilation
+
+            ---
+            For help with compilation see:
+                https://www.pygame.org/wiki/MacCompile
+            To contribute to pygame development see:
+                https://www.pygame.org/contribute.html
+            ---
+
+            error: command '/usr/bin/clang' failed with exit code 1
+            [end of output]
+
+        note: This error originates from a subprocess, and is likely not a problem with pip.
+        ERROR: Failed building wheel for pygame
+        Failed to build pygame
+
+        [notice] A new release of pip is available: 26.1 -> 26.1.2
+        [notice] To update, run: pip install --upgrade pip
+        error: failed-wheel-build-for-install
+
+        × Failed to build installable wheels for some pyproject.toml based projects
+        ╰─> pygame
+    ```
+    Fix::
+        Updated package version and fixed the error
+
 [Notes on setting up your local development environment - challenges you faced, how you solved them]
 
-### Steps to Reproduce
 
-1. [Step 1]
-2. [Step 2]
-3. [Observed result]
 
 ### Reproduction Evidence
 
@@ -56,7 +116,47 @@ Working through this issue strengthens my ability to spot logical errors, write 
 
 ---
 
-## Solution Approach
+## Solution Approach(UMPIRE)
+
+
+U — Understand
+Read the issue description and confirm the goal: fix the broken behavior in the files under intermediate.
+Review the existing helper functions and the hints already embedded in:
+dict_ops.py
+json_handler.py
+some_functions.py
+sql_handler.py
+txt_handler.py
+
+M — Minimize
+Keep the scope limited to the bug fixes in those intermediate exercises.
+Avoid refactors or redesigns unless needed for correctness.
+Fix only the broken logic described by the comments and expected behavior.
+
+P — Prepare
+Create a feature branch for the work.
+Reproduce the current behavior by running each script or exercising the functions manually.
+Note the expected output for each function before changing code.
+
+I — Implement
+Fix the logic in each target file:
+In dict_ops.py, preserve falsy keys, apply latest values in merge logic, and count keys using the intended prefix behavior.
+In json_handler.py, raise a proper error for missing files, handle empty key paths safely, and return success values correctly.
+In some_functions.py, correct Fibonacci indexing, factorial logic, prime-check behavior, GCD termination, and sum-of-squares math.
+In sql_handler.py, preserve decimal values, sort ascending by id, update only the targeted row, and delete the correct item.
+In txt_handler.py, stop altering content unexpectedly, use append mode correctly, support zero-based line updates, and preserve file formatting.
+
+R — Review
+Run the scripts again and verify they now align with the intended behavior.
+Check that no unrelated files were changed.
+Review the diff for clarity and minimality.
+
+E — Evaluate
+Confirm the bug is resolved and the output now matches the expectations described in the issue.
+Prepare a short PR description with:
+what was fixed,
+files changed,
+how it was validated.
 
 ### Analysis
 
